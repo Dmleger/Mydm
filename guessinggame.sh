@@ -1,31 +1,29 @@
 #/usr/bin/env bash guessinggame.sh
 #funcion string
-function  Hola { echo "Hola from SDQ";}
-		
-echo  "Sart program number of files by DL, choose one number $numberfile"
+#set -x
 
-read numberfile
+function count_files { 
+  l=`ls | wc -l`
+  return $l
+}
 
-if [[ $numberfile -gt 23 ]]
-   then
-      echo " the number you enter is high than you push "
+echo  "How many files are in the current directory? $numberfile"
+count_files
 
- elif [[ $numberfile  -lt 23 ]]
-   then
-      echo " the number you enter is less than you push"
-
- elif [[ $numberfile  -eq 23 ]]
- 
-	  then
- echo " is correct!!! Congratulations the program should be end"
-	    
-
-	numberfile=$[$numberfile+1]
-else
-
-
-while  [[ $numberfile  -le 23 ]]
+while  [[ $numberfile -ne $l ]]
 do
-        echo  "you need to continue"
+read numberfile
+count_files
+if  [[ $numberfile  -gt $l ]]
+then
+	echo "the number you enter is high than you push"
+elif  [[ $numberfile  -lt $l  ]]
+then
+	echo "the number you enter is less than you push"
+elif  [[ $numberfile  -eq $l ]]
+then
+	echo "is correct!!! Congratulations the program should be end"
+fi 
+
 done
-fi
+#exit 
